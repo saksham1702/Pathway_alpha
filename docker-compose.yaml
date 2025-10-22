@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  financial-ai-pipeline:
+    build: .
+    container_name: financial-ai-pipeline
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./.env:/app/.env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    command: python financial_ai_pipeline.py
